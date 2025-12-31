@@ -1,0 +1,21 @@
+Конфигурация (AppConfig): Настраивает Jackson ObjectMapper для работы с датами
+
+Контроллер (PhotoController): Принимает HTTP запросы и делегирует работу сервису
+
+Сущность (PhotoEntity): Представляет таблицу в БД, содержит бизнес-данные
+
+Репозиторий (PhotoRepository): Обеспечивает доступ к данным в БД через JPA
+
+Слоистая архитектура: Контроллер → Сервис → Репозиторий → БД
+
+Photo (Record) - DTO для передачи данных между слоями
+
+DbPhotoService (@Component) - бизнес-логика приложения
+
+PhotoService (Interface) - контракт для сервиса работы с фотографиями
+
+PhotocatalogApplication (@SpringBootApplication) - главный класс приложения
+
+application.yml - конфигурация Spring Boot, БД, JPA, Flyway
+
+build.gradle - система сборки и управления зависимостями

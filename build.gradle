@@ -1,35 +1,62 @@
+// Блок plugins - объявление плагинов Gradle
 plugins {
-	id 'java'
-	//id 'org.springframework.boot' version '4.0.1'
+    // Применение плагина Java
+    // id 'java' - идентификатор плагина
+    id 'java'
+    // Закомментированная старая версия Spring Boot плагина
+    //id 'org.springframework.boot' version '4.0.1'
+    // Применение Spring Boot плагина версии 3.4.1
     id 'org.springframework.boot' version '3.4.1'
-	id 'io.spring.dependency-management' version '1.1.7'
+    // Применение плагина для управления зависимостями Spring
+    id 'io.spring.dependency-management' version '1.1.7'
 }
 
+// Группа проекта (обычно обратное доменное имя)
 group = 'guru.qa'
+// Версия проекта
 version = '0.0.1-SNAPSHOT'
+// Описание проекта
 description = 'Demo project for Spring Boot'
 
+// Блок java - настройки Java
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
-	}
+    // Блок toolchain - настройки инструментария Java
+    toolchain {
+        // Версия языка Java (21)
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
+// Блок repositories - репозитории для загрузки зависимостей
 repositories {
-	mavenCentral()
+    // Maven Central - основной репозиторий Maven
+    mavenCentral()
 }
 
+// Блок dependencies - зависимости проекта
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // Зависимость Spring Boot Starter Web (веб-приложение)
+    // implementation - зависимость используется для компиляции и выполнения
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    // Зависимость Spring Boot Starter Data JPA (работа с БД)
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // Зависимость Flyway Core (миграции БД) версии 10.17.1
     implementation 'org.flywaydb:flyway-core:10.17.1'
+    // Зависимость Flyway для PostgreSQL версии 10.17.1
     implementation 'org.flywaydb:flyway-database-postgresql:10.17.1'
+    // Зависимость PostgreSQL драйвера (только для runtime)
+    // runtimeOnly - зависимость нужна только во время выполнения
     runtimeOnly 'org.postgresql:postgresql:42.7.8'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // Зависимость Spring Boot Starter Test (тестирование)
+    // testImplementation - зависимость только для тестов
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // Зависимость JUnit Platform Launcher (запуск тестов)
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 }
 
+// Конфигурация задачи test
 tasks.named('test') {
-	useJUnitPlatform()
+    // Использование JUnit Platform для запуска тестов
+    useJUnitPlatform()
 }
