@@ -16,6 +16,8 @@ public class DbPhotoService implements PhotoService {
     @Autowired
     public DbPhotoService(PhotoRepository photoRepository) {
         this.photoRepository = photoRepository;
+        System.out.println("Repository class: " + photoRepository.getClass());
+        System.out.println("Total photos in DB: " + photoRepository.count());
     }
 
     @Override

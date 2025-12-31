@@ -20,14 +20,20 @@ spring:
     baseline-version: 0 # Начальная версия миграций, 0 означает, что существующая БД считается "базовой линией"
     schemas: photocatalog # Flyway будет работать со схемой photocatalog в PostgreSQL
     locations: classpath:db/migration/photocatalog #Путь к SQL файлам миграций, classpath: - искать в ресурсах проекта
+    validate-on-migrate: true #Это гарантирует, что Flyway проверяет целостность миграций при запуске.
   jpa:
     hibernate:
       ddl-auto: none
     properties:
       hibernate:
+        default_schema: photocatalog  # ← КЛЮЧЕВОЕ ИЗМЕНЕНИЕ!
+        #Hibernate по умолчанию ищет таблицы в схеме public
+        #Ваши таблицы были созданы в схеме photocatalog (это указано в Flyway: schemas: photocatalog)
+        #Без указания default_schema: photocatalog Hibernate не мог найти таблицу photos, потому что искал её в public.photos, а не в photocatalog.photos
         jdbc:
           lob:
             non_contextual_creation: true
+      show-sql: true  # Включите для отладки
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: false
     generate-ddl: true
